@@ -3,13 +3,21 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AllPlaces from "./screens/AllPlaces";
 import AddPlace from "./screens/AddPlace";
+
+import PlaceDetails from "./screens/PlaceDetails";
 import IconButton from "./components/ui/IconButton";
 import { Colors } from "./constant/colors";
 import Map from "./screens/Map";
+import { useEffect } from "react";
+import { init } from "./util/database";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    init();
+  }, []);
+
   return (
     <>
       <StatusBar style="dark" />
@@ -49,6 +57,7 @@ export default function App() {
               title: "Mapita",
             }}
           />
+          <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
